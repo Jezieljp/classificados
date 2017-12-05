@@ -31,12 +31,22 @@ if(empty($_SESSION['clogin'])) {
         
         foreach ($anuncios as $anuncio):
         ?>
-            <tr>
-                <td><img src="assets/images/anuncios/<?php echo $anuncio['capa']; ?>" width="80" height="80" border="0" /></td>
-                <td><?php echo $anuncio['titulo']; ?></td>
-                <td>R$ <?php echo number_format($anuncio['valor'], 2) ?></td>
-                <td></td>
-        </tr>
+        <tr>
+               <td>
+                   <!-- fazendo uma verificação se extite uma imagem se não ele coloca outra-->
+                   <?php if (!empty($anuncios['capa'])): ?>
+                      <img src="assets/images/anuncios/<?php echo $anuncio['capa']; ?>" width="80" height="80" border="0" /></td>
+               <?php else: ?>
+              <img src="assets/images/default.jpg" height="30" border="0"/>
+           <?php endif; ?>
+           <td><?php echo $anuncio['titulo']; ?></td>
+           <td>R$ <?php echo number_format($anuncio['valor'], 2) ?></td>
+           <td>
+               <a href="editar-anuncio.php?id=<?php echo $anuncio['id'];?>" class="btn btn-default">Editar</a>
+               <a href="excluir-anuncio.php?id=<?php echo $anuncio['id'];?>" class="btn btn-danger">Excluir</a>
+
+           </td>
+       </tr>
         <?php  endforeach; ?>
     </table>
 
